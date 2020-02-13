@@ -2,46 +2,51 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 export default class ContactForm extends Component {
+  static propTypes = {
+    onAddContact: PropTypes.func
+  };
+
   state = {
     name: "",
     phone: ""
   };
 
-  handelNameChange = e => {
+  handleChange = e => {
+    const { name, value } = e.target;
     this.setState({
-      name: e.target.value
+      [name]: value
     });
   };
-  handelPhoneChange = e => {
-    this.setState({
-      phone: e.target.value
-    });
-  };
+
   hanleSubmit = e => {
     e.preventDefault();
-    this.props.onAddContact(this.state.name, this.state.phone);
+    const { name, phone } = this.state;
+    this.props.onAddContact(name, phone);
     this.setState({ name: "", phone: "" });
   };
 
   render() {
+    const { name, phone } = this.state;
     return (
       <form onSubmit={this.hanleSubmit}>
         <label>
           Name
           <input
             type="text"
-            value={this.state.name}
+            value={name}
             placeholder="Enter name"
-            onChange={this.handelNameChange}
+            onChange={this.handleChange}
+            name="name"
           ></input>
         </label>
         <label>
           Phone
           <input
             type="text"
-            value={this.state.phone}
+            value={phone}
             placeholder="Enter phone"
-            onChange={this.handelPhoneChange}
+            onChange={this.handleChange}
+            name="phone"
           ></input>
         </label>
         <button type="submit">Add contact</button>
@@ -49,6 +54,3 @@ export default class ContactForm extends Component {
     );
   }
 }
-ContactForm.propTypes = {
-  onAddContact: PropTypes.func
-};

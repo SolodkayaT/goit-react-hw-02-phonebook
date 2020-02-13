@@ -7,7 +7,7 @@ export default function ContactList({ contacts, onRemoveContact }) {
       {contacts.map(contact => (
         <li key={contact.id}>
           <p>
-            {contact.name} {contact.phone}
+            {contact.name} : {contact.phone}
           </p>
           <button type="button" onClick={() => onRemoveContact(contact.id)}>
             Delete
@@ -17,9 +17,11 @@ export default function ContactList({ contacts, onRemoveContact }) {
     </ul>
   );
 }
+
 ContactList.defaultProps = {
   contacts: []
 };
+
 ContactList.propTypes = {
   contacts: PropTypes.array,
   onRemoveContact: PropTypes.func

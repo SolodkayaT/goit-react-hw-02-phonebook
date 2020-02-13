@@ -11,15 +11,20 @@ export default class App extends Component {
   };
 
   changeFilter = filter => {
-    console.log(filter);
     this.setState({ filter });
   };
 
   addContact = (name, phone) => {
-    const contact = { id: uuid(), name, phone };
-    this.setState(prevState => {
-      return { contacts: [...prevState.contacts, contact] };
-    });
+    const { contacts } = this.state;
+    const dubleContact = contacts.find(contact => contact.name === name);
+    if (dubleContact) {
+      alert(`${name} is already in cntacts!`);
+    } else {
+      const contact = { id: uuid(), name, phone };
+      this.setState(prevState => {
+        return { contacts: [...prevState.contacts, contact] };
+      });
+    }
   };
 
   getFiltredContacts = () => {

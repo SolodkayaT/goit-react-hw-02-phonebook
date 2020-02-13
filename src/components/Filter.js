@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export default function Filter({ value, onChangeFilter }) {
   return (
@@ -11,3 +12,12 @@ export default function Filter({ value, onChangeFilter }) {
     </div>
   );
 }
+
+Filter.defaultProps = {
+  value: ""
+};
+
+Filter.propTypes = {
+  value: PropTypes.string,
+  onChangeFilter: PropTypes.func
+};
