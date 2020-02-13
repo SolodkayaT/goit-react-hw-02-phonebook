@@ -1,0 +1,9 @@
+.title {
+  font-family: "Sriracha", cursive;
+}
+.section {
+  width: 300px;
+  margin: 0 auto;
+  padding-top: 30px;
+  text-align: center;
+}

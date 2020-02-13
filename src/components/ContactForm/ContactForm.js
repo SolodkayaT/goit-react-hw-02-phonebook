@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import styles from "./ContactForm.module.css";
 
 export default class ContactForm extends Component {
   static propTypes = {
@@ -28,10 +29,11 @@ export default class ContactForm extends Component {
   render() {
     const { name, phone } = this.state;
     return (
-      <form onSubmit={this.hanleSubmit}>
-        <label>
+      <form className={styles.form} onSubmit={this.hanleSubmit}>
+        <label className={styles.formLabel}>
           Name
           <input
+            className={styles.formInput}
             type="text"
             value={name}
             placeholder="Enter name"
@@ -39,9 +41,10 @@ export default class ContactForm extends Component {
             name="name"
           ></input>
         </label>
-        <label>
+        <label className={styles.formLabel}>
           Phone
           <input
+            className={styles.formInput}
             type="text"
             value={phone}
             placeholder="Enter phone"
@@ -49,7 +52,9 @@ export default class ContactForm extends Component {
             name="phone"
           ></input>
         </label>
-        <button type="submit">Add contact</button>
+        <button className={styles.formButton} type="submit">
+          Add contact
+        </button>
       </form>
     );
   }

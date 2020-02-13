@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import ContactList from "./ContactList";
-import ContactForm from "./ContactForm";
-import Filter from "./Filter";
+import ContactList from "../ContactList/ContactList";
+import ContactForm from "../ContactForm/ContactForm";
+import Filter from "../Filter/Filter";
+import styles from "./App.module.css";
 import { uuid } from "uuidv4";
 
 export default class App extends Component {
@@ -15,15 +16,17 @@ export default class App extends Component {
   };
 
   addContact = (name, phone) => {
-    const { contacts } = this.state;
-    const dubleContact = contacts.find(contact => contact.name === name);
-    if (dubleContact) {
-      alert(`${name} is already in cntacts!`);
-    } else {
-      const contact = { id: uuid(), name, phone };
-      this.setState(prevState => {
-        return { contacts: [...prevState.contacts, contact] };
-      });
+    if (name && phone) {
+      const { contacts } = this.state;
+      const dubleContact = contacts.find(contact => contact.name === name);
+      if (dubleContact) {
+        alert(`${name} is already in cntacts!`);
+      } else {
+        const contact = { id: uuid(), name, phone };
+        this.setState(prevState => {
+          return { contacts: [...prevState.contacts, contact] };
+        });
+      }
     }
   };
 
@@ -46,10 +49,10 @@ export default class App extends Component {
     const { contacts, filter } = this.state;
     const visibleContacts = this.getFiltredContacts();
     return (
-      <>
-        <h1>Phonebook</h1>
+      <section className={styles.section}>
+        <h1 className={styles.title}>Phonebook</h1>
         <ContactForm onAddContact={this.addContact} />
-        <h2>Contacts</h2>
+        <h2 className={styles.title}>Contacts</h2>
         {contacts.length > 1 && (
           <Filter value={filter} onChangeFilter={this.changeFilter} />
         )}
@@ -59,7 +62,7 @@ export default class App extends Component {
             onRemoveContact={this.removeContact}
           />
         )}
-      </>
+      </section>
     );
   }
 }
