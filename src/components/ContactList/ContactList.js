@@ -24,7 +24,8 @@ export default function ContactList({ contacts, onRemoveContact }) {
 }
 
 ContactList.defaultProps = {
-  contacts: []
+  contacts: [],
+  onRemoveContact: () => {}
 };
 
 ContactList.propTypes = {

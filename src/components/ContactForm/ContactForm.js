@@ -6,6 +6,9 @@ export default class ContactForm extends Component {
   static propTypes = {
     onAddContact: PropTypes.func
   };
+  static defaultProps = {
+    onAddContact: () => {}
+  };
 
   state = {
     name: "",
@@ -39,6 +42,7 @@ export default class ContactForm extends Component {
             placeholder="Enter name"
             onChange={this.handleChange}
             name="name"
+            required
           ></input>
         </label>
         <label className={styles.formLabel}>
@@ -50,6 +54,7 @@ export default class ContactForm extends Component {
             placeholder="Enter phone"
             onChange={this.handleChange}
             name="phone"
+            required
           ></input>
         </label>
         <button className={styles.formButton} type="submit">

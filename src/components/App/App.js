@@ -16,18 +16,16 @@ export default class App extends Component {
   };
 
   addContact = (name, phone) => {
-    if (name && phone) {
-      const { contacts } = this.state;
-      const dubleContact = contacts.find(contact => contact.name === name);
-      if (dubleContact) {
-        alert(`${name} is already in cntacts!`);
-      } else {
-        const contact = { id: uuid(), name, phone };
-        this.setState(prevState => {
-          return { contacts: [...prevState.contacts, contact] };
-        });
-      }
+    const { contacts } = this.state;
+    const isExist = contacts.some(contact => contact.name === name);
+    if (isExist) {
+      alert(`${name} is already in cntacts!`);
+      return;
     }
+    const contact = { id: uuid(), name, phone };
+    this.setState(prevState => {
+      return { contacts: [...prevState.contacts, contact] };
+    });
   };
 
   getFiltredContacts = () => {
@@ -37,10 +35,10 @@ export default class App extends Component {
     );
   };
 
-  removeContact = ContactId => {
+  removeContact = id => {
     this.setState(prevState => {
       return {
-        contacts: prevState.contacts.filter(contact => contact.id !== ContactId)
+        contacts: prevState.contacts.filter(contact => contact.id !== id)
       };
     });
   };
@@ -51,7 +49,7 @@ export default class App extends Component {
     return (
       <section className={styles.section}>
         <h1 className={styles.title}>Phonebook</h1>
-        <ContactForm onAddContact={this.addContact} />
+        {ContactForm && <ContactForm onAddContact={this.addContact} />}
         <h2 className={styles.title}>Contacts</h2>
         {contacts.length > 1 && (
           <Filter value={filter} onChangeFilter={this.changeFilter} />
