@@ -1,23 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./ContactList.module.css";
+import ContactListItem from "../ContactListItem/ContactListItem";
+import { uuid } from "uuidv4";
+import ContactListButton from "../ContactListButton/ContactListButton";
 
-export default function ContactList({ contacts, onRemoveContact }) {
+export default function ContactList({ contacts, onRemove }) {
   return (
     <ul>
       {contacts.map(contact => (
-        <li className={styles.contactItem} key={contact.id}>
-          <p>
-            {contact.name} : {contact.phone}
-          </p>
-          <button
-            className={styles.contactButton}
-            type="button"
-            onClick={() => onRemoveContact(contact.id)}
-          >
-            Delete
-          </button>
-        </li>
+        <ContactListItem contact={contact} key={uuid()}>
+          <ContactListButton
+            contact={contact}
+            onRemoveContact={() => onRemove(contact.id)}
+          />
+        </ContactListItem>
       ))}
     </ul>
   );
@@ -25,10 +21,10 @@ export default function ContactList({ contacts, onRemoveContact }) {
 
 ContactList.defaultProps = {
   contacts: [],
-  onRemoveContact: () => {}
+  onRemove: () => {}
 };
 
 ContactList.propTypes = {
   contacts: PropTypes.array,
-  onRemoveContact: PropTypes.func
+  onRemove: PropTypes.func
 };

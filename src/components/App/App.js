@@ -57,7 +57,7 @@ export default class App extends Component {
         {visibleContacts.length > 0 && (
           <ContactList
             contacts={visibleContacts}
-            onRemoveContact={this.removeContact}
+            onRemove={this.removeContact}
           />
         )}
       </section>

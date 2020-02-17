@@ -16,7 +16,8 @@ export default function Filter({ value, onChangeFilter }) {
 }
 
 Filter.defaultProps = {
-  value: ""
+  value: "",
+  onChangeFilter: () => {}
 };
 
 Filter.propTypes = {

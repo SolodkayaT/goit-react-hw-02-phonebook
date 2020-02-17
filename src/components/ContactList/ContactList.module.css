@@ -1,9 +1,0 @@
-.contactItem {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-bottom: 10px;
-}
-.contactButton {
-  align-self: flex-end;
-}
